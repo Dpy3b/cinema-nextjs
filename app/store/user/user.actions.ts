@@ -23,7 +23,7 @@ export const login = createAsyncThunk<IAuthResponce, IEmailPassword>(
 	'auth/login',
 	async ({ email, password }, thunkApi) => {
 		try {
-			const response = await AuthService.register(email, password);
+			const response = await AuthService.login(email, password);
 			toastr.success('Login', 'Completed successfully');
 			return response.data;
 		} catch (error) {
@@ -37,7 +37,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 	await AuthService.logout();
 });
 
-export const checkAuth = createAsyncThunk<IAuthResponce, IEmailPassword>(
+export const checkAuth = createAsyncThunk<IAuthResponce>(
 	'auth/check-auth',
 	async (_, thunkApi) => {
 		try {

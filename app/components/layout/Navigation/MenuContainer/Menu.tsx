@@ -1,9 +1,16 @@
 import { FC } from 'react';
 
-import AuthItems from './auth/AuthItems';
-import { IMenu } from './menu.interface';
+
+
 import styles from './Menu.module.scss';
 import MenuItem from './MenuItem';
+import AuthItems from './auth/AuthItems';
+import { IMenu } from './menu.interface';
+import dynamic from 'next/dynamic';
+
+
+
+const DynamicAuthItems = dynamic(() => import('./auth/AuthItems'), { ssr: false })
 
 const Menu: FC<{ menu: IMenu }> = ({ menu: { items, title } }) => {
 	return (
@@ -11,11 +18,10 @@ const Menu: FC<{ menu: IMenu }> = ({ menu: { items, title } }) => {
 			<div className={styles.heading}>{title}</div>
 			<ul className={styles.ul}>
 				{items.map(item => (
-					<MenuItem item={item} key={item.link} />
+					<MenuItem key={item.link} item={item} />
 				))}
-                 {title === 'General' ? <AuthItems /> : null} {/* тайтл возможно в юэльку */}
+				{title === 'General' ? <DynamicAuthItems /> : null}
 			</ul>
-
 		</div>
 	);
 };

@@ -1,14 +1,11 @@
 import { getContentType } from 'api/api.helpers';
 import { axiosClassic } from 'api/interceptors';
+import axios from 'axios';
 import Cookies from 'js-cookie';
-
-
 
 import { removeTokensStorage, saveToStorage } from './auth.helper';
 import { API_URL, getAuthUrl } from '@/config/api.config';
 import { IAuthResponce } from '@/store/user/user.interface';
-import axios from 'axios';
-
 
 export const AuthService = {
 	async register(email: string, password: string) {
@@ -24,7 +21,7 @@ export const AuthService = {
 	},
 
 	async login(email: string, password: string) {
-		const response = await axiosClassic.post<IAuthResponce>(getAuthUrl('/register'), {
+		const response = await axiosClassic.post<IAuthResponce>(getAuthUrl('/login'), {
 			email,
 			password,
 		});
@@ -37,7 +34,7 @@ export const AuthService = {
 
 	logout() {
 		removeTokensStorage();
-	//	localStorage.removeItem('user');
+		localStorage.removeItem('user');
 	},
 
 	async getNewTokens() {

@@ -3,6 +3,6 @@ import {reducer as userReducer} from './user/user.slice'
 
 
 export const reducers = {
-    toastr: toastrReducer,
-    user: userReducer
+    user: userReducer,
+    toastr: toastrReducer
 }

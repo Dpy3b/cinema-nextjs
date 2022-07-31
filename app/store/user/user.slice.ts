@@ -1,3 +1,4 @@
+import { getStoreLocal } from './../../utils/local-storage';
 import { createSlice } from '@reduxjs/toolkit';
 
 
@@ -8,7 +9,7 @@ import { IInitialState } from './user.interface';
 
 
 const initialState: IInitialState = {
-	user: null, //getStoreLocal('user'),
+	user: getStoreLocal('user'),
 	isLoading: false,
 };
 

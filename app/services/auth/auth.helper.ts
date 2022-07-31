@@ -18,5 +18,5 @@ Cookies.set('refreshToken', data.refreshToken);
 
 export const saveToStorage = (data: IAuthResponce) => {
 	saveTokensStorage(data);
-//	localStorage.setItem('user', JSON.stringify(data.user));
+	localStorage.setItem('user', JSON.stringify(data.user));
 };
