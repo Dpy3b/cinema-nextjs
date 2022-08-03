@@ -4,7 +4,7 @@ export interface IGenre {
 	_id: string;
 	name: string;
 	slug: string;
-	desription: string;
+	description: string;
 	icon: TypeMaterialIconName;
 }
 

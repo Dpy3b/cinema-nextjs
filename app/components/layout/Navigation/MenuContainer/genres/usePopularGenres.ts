@@ -4,12 +4,12 @@ import { useQuery } from "react-query";
 
 
 
-import { GenreSercive } from './../../../../../services/genre.sercive';
+import { GenreService } from '@/services/genre.service';
 
 
 export const usePopularGenres = () => {
     // первый аргумент - уникальный ключ для идентификации запросов
-    const queryData = useQuery('popular genre menu', () => GenreSercive.getAll(), {
+    const queryData = useQuery('popular genre menu', () => GenreService.getAll(), {
 		select: ({ data }) => data.map(genre => ({
             icon: genre.icon,
             link: getGenreUrl(genre.slug),

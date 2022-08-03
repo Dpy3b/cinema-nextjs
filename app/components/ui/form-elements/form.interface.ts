@@ -1,5 +1,6 @@
 //import { EditorProps } from 'draft-js';
 import { ButtonHTMLAttributes, CSSProperties, InputHTMLAttributes } from 'react';
+import { EditorProps } from 'react-draft-wysiwyg';
 import { ControllerRenderProps, FieldError, FieldErrors } from 'react-hook-form';
 
 
@@ -14,13 +15,14 @@ type TypeInputPropsField = InputHTMLAttributes<HTMLInputElement> & IFieldProps;
 
 export interface IField extends TypeInputPropsField {}
 
-//type TypeEditorPropsField = EditorProps & IFieldProps;
 
-/* export interface ITextEditor extends Omit<TypeEditorPropsField, 'editorState'> {
+// тип для эдитора объединенный с нашим
+type TypeEditorPropsField = EditorProps & IFieldProps;
+// убираем ненужное поле эдиторСтейт через омит
+export interface ITextEditor extends Omit<TypeEditorPropsField, 'editorState'> {
 	onChange: (...event: any[]) => void;
-	value: any;
-	field: any;
-} */
+	value: string;
+}
 
 export interface IUploadField {
 	onChange: (...event: any[]) => void;

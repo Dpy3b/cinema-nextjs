@@ -18,5 +18,8 @@ export const MovieService = {
             )
 
         return movies
-    }
+    },
+	async deleteMovie(_id: string){
+		return axiosClassic.delete<string>(getMoviesUrl(`/${_id}`))
+	}
 };
