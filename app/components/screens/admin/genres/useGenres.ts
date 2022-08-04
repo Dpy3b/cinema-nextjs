@@ -1,15 +1,18 @@
-
+import { useRouter } from 'next/router';
 import { ChangeEvent, useMemo, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { toastr } from 'react-redux-toastr';
 
+
+
 import { ITableItem } from '@/components/ui/admin-table/AdminTable/admin-table.interface';
 import { getAdminUrl } from '@/config/url.config';
 import { useDebounce } from '@/hooks/useDebounce';
-import { convertMongoDate } from '@/utils/date/convertMongoDate';
-import { toastError } from '@/utils/toast-error';
-import { getGenresList, getGenresListEach } from '@/utils/movie/getGenresList';
 import { GenreService } from '@/services/genre.service';
+import { convertMongoDate } from '@/utils/date/convertMongoDate';
+import { getGenresList, getGenresListEach } from '@/utils/movie/getGenresList';
+import { toastError } from '@/utils/toast-error';
+
 
 export const useGenres = () => {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -37,6 +40,8 @@ export const useGenres = () => {
 		setSearchTerm(e.target.value);
 	};
 
+	const {push} = useRouter()
+
 	const { mutateAsync: deleteAsync } = useMutation(
 		['delete genre', debouncedSearch],
 		(genreId: string) => GenreService.deleteGenre(genreId),
@@ -51,6 +56,20 @@ export const useGenres = () => {
 			},
 		}
 	);
+	const { mutateAsync: createAsync } = useMutation(
+		['create genre', debouncedSearch],
+		() => GenreService.create(),
+		{
+			onError: error => {
+				toastError(error, 'Create genre');
+			},
+			onSuccess({ data: _id }) {
+				toastr.success('Create genre', 'Create was successful');
+				//	queryData.refetch(); // обновляем данные, получаем по сути их без удаленного юзера
+				push(getAdminUrl(`genre/edit/${_id}`));
+			},
+		}
+	);
 
 	return useMemo(
 		() => ({
@@ -58,7 +77,8 @@ export const useGenres = () => {
 			...queryData,
 			searchTerm,
 			deleteAsync,
+			createAsync
 		}),
-		[queryData, searchTerm, deleteAsync]
+		[queryData, searchTerm, deleteAsync, createAsync]
 	);
 };

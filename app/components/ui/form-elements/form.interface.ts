@@ -25,13 +25,11 @@ export interface ITextEditor extends Omit<TypeEditorPropsField, 'editorState'> {
 }
 
 export interface IUploadField {
+	folder?: string;
+	image?: string;
 	onChange: (...event: any[]) => void;
 	placeholder: string;
-	isPhotos?: boolean;
-	folder?: string;
-	value?: any;
 	error?: FieldError;
 	style?: CSSProperties;
 	isNoImage?: boolean;
-	field?: ControllerRenderProps<any, any>;
 }

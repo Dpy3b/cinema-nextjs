@@ -11,7 +11,7 @@ import { getAdminHomeUrl } from '@/config/url.config';
 
 const AuthItems: FC = () => {
   const { user } = useAuth()
- 
+
   return (
     <>
       {user ? (
