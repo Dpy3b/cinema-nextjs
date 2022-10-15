@@ -12,7 +12,7 @@ import AdminNavigation from '@/components/ui/admin-navigation/AdminNavigation';
 import Button from '@/components/ui/form-elements/Button';
 import Field from '@/components/ui/form-elements/Field';
 import SlugField from '@/components/ui/form-elements/SlugField/SlugField';
-import UploadField from '@/components/ui/form-elements/UploadField/UploadField';
+import UploadField from '@/components/ui/form-elements/UploadField/UploadFile';
 import Heading from '@/components/ui/heading/Heading';
 import SkeletonLoader from '@/components/ui/heading/SkeletonLoader';
 import { Meta } from '@/utils/meta/Meta';
@@ -134,7 +134,7 @@ const MovieEdit: FC = () => {
 								render={({ field: { value, onChange }, fieldState: { error } }) => (
 									<UploadField
 										onChange={onChange}
-										image={value}
+										value={value}
 										error={error}
 										folder='movies'
 										placeholder='Poster'
@@ -152,7 +152,7 @@ const MovieEdit: FC = () => {
 								render={({ field: { value, onChange }, fieldState: { error } }) => (
 									<UploadField
 										onChange={onChange}
-										image={value}
+										value={value}
 										error={error}
 										folder='movies'
 										placeholder='Big poster'
@@ -170,7 +170,7 @@ const MovieEdit: FC = () => {
 								render={({ field: { value, onChange }, fieldState: { error } }) => (
 									<UploadField
 										onChange={onChange}
-										image={value}
+										value={value}
 										error={error}
 										folder='movies'
 										placeholder='Video'

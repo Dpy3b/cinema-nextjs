@@ -2,15 +2,15 @@ import cn from 'classnames';
 import Image from 'next/image';
 import { FC } from 'react';
 
+import SkeletonLoader from '../../heading/SkeletonLoader';
 import styles from '../Form.module.scss';
 import { IUploadField } from '../form.interface';
 
 import { useUpload } from './useUpload';
-import SkeletonLoader from '../../heading/SkeletonLoader';
 
-const UploadField: FC<IUploadField> = ({
+const UploadFile: FC<IUploadField> = ({
 	placeholder,
-	image,
+	value,
 	onChange,
 	error,
 	folder,
@@ -32,7 +32,7 @@ const UploadField: FC<IUploadField> = ({
 						{isLoading ? (
 							<SkeletonLoader count={1} className='w-full h-full' />
 						) : (
-							image && <Image src={image} alt='' layout='fill' unoptimized />
+							value && <Image src={value} alt='' layout='fill' unoptimized />
 						)}
 					</div>
 				)}
@@ -41,4 +41,4 @@ const UploadField: FC<IUploadField> = ({
 	);
 };
 
-export default UploadField;
+export default UploadFile;

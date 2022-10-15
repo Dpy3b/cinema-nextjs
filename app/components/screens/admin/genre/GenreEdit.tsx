@@ -1,11 +1,9 @@
+import dynamic from 'next/dynamic';
 import { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-
-
+import { stripHtml } from 'string-strip-html';
 
 import formStyles from '../../../ui/form-elements/admin-form.module.scss';
-
-
 
 import { IGenreEditInput } from './genre-edit.interface';
 import { useGenreEdit } from './useGenreEdit';
@@ -13,18 +11,14 @@ import AdminNavigation from '@/components/ui/admin-navigation/AdminNavigation';
 import Button from '@/components/ui/form-elements/Button';
 import Field from '@/components/ui/form-elements/Field';
 import SlugField from '@/components/ui/form-elements/SlugField/SlugField';
-import TextEditor from '@/components/ui/form-elements/TextEditor';
 import Heading from '@/components/ui/heading/Heading';
 import SkeletonLoader from '@/components/ui/heading/SkeletonLoader';
 import { Meta } from '@/utils/meta/Meta';
 import generateSlug from '@/utils/string/generateSlug';
-import { stripHtml } from 'string-strip-html';
-import dynamic from 'next/dynamic';
 
 const DynamicTextEditor = dynamic(() => import('@/ui/form-elements/TextEditor'), {
 	ssr: false,
 });
-
 
 const GenreEdit: FC = () => {
 	const {
@@ -33,7 +27,7 @@ const GenreEdit: FC = () => {
 		formState: { errors },
 		setValue,
 		getValues,
-        control,
+		control,
 	} = useForm<IGenreEditInput>({
 		mode: 'onChange',
 	});
@@ -73,28 +67,26 @@ const GenreEdit: FC = () => {
 								style={{ width: '31%' }}
 							/>
 							{/* text editor draft.js*/}
-                                 <Controller
-							name="description"
-							control={control}
-							defaultValue=""
-							render={({
-								field: { value, onChange },
-								fieldState: { error },
-							}) => (
-								<DynamicTextEditor
-                                    placeholder="Description"
-                                    onChange={onChange}
-                                    error={error}
-                                    value={value}						/>
-							)}
-							rules={{
-								validate: {
-									required: (v) =>
-										(v && stripHtml(v).result.length > 0) ||
-										'Description is required!',
-								},
-							}}
-						/>
+							<Controller
+								name='description'
+								control={control}
+								defaultValue=''
+								render={({ field: { value, onChange }, fieldState: { error } }) => (
+									<DynamicTextEditor
+										placeholder='Description'
+										onChange={onChange}
+										error={error}
+										value={value}
+									/>
+								)}
+								rules={{
+									validate: {
+										required: v =>
+											(v && stripHtml(v).result.length > 0) ||
+											'Description is required!',
+									},
+								}}
+							/>
 
 							<Button>Update</Button>
 						</div>

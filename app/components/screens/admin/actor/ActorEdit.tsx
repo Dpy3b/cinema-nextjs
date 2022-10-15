@@ -9,7 +9,7 @@ import AdminNavigation from '@/components/ui/admin-navigation/AdminNavigation';
 import Button from '@/components/ui/form-elements/Button';
 import Field from '@/components/ui/form-elements/Field';
 import SlugField from '@/components/ui/form-elements/SlugField/SlugField';
-import UploadField from '@/components/ui/form-elements/UploadField/UploadField';
+import UploadFile from '@/components/ui/form-elements/UploadField/UploadFile';
 import Heading from '@/components/ui/heading/Heading';
 import SkeletonLoader from '@/components/ui/heading/SkeletonLoader';
 import { Meta } from '@/utils/meta/Meta';
@@ -55,22 +55,25 @@ const ActorEdit: FC = () => {
 							/>
 
 							<Controller
-								control={control}
-								name='photo'
-								defaultValue=''
-								render={({ field: { value, onChange }, fieldState: { error } }) => (
-									<UploadField
-										onChange={onChange}
-										image={value}
-										error={error}
-										folder='actors'
-										placeholder='Photo'
-									/>
-								)}
-								rules={{
-									required: 'Photo is required',
-								}}
-							/>
+							name="photo"
+							control={control}
+							defaultValue=""
+							render={({
+								field: { value, onChange },
+								fieldState: { error },
+							}) => (
+								<UploadFile
+									placeholder="Photo"
+									error={error}
+									folder="actors"
+									value={value}
+									onChange={onChange}
+								/>
+							)}
+							rules={{
+								required: 'Photo is required!',
+							}}
+						/>
 						</div>
 						<Button>Update</Button>
 					</>
