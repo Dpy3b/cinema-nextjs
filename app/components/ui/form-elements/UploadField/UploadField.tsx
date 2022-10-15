@@ -8,7 +8,7 @@ import { IUploadField } from '../form.interface';
 
 import { useUpload } from './useUpload';
 
-const UploadFile: FC<IUploadField> = ({
+const UploadField: FC<IUploadField> = ({
 	placeholder,
 	value,
 	onChange,
@@ -41,4 +41,4 @@ const UploadFile: FC<IUploadField> = ({
 	);
 };
 
-export default UploadFile;
+export default UploadField;
